@@ -6,24 +6,30 @@
 - django
 
 ## Core Structure
+
     root
-      ├── package.json
       │
       ├── django (api.example.com)
-      │   ├── 
-      │   ├── 
-      │   │   ├── 
+      │   ├──
+      │   ├──
+      │   │   ├──
       │   │
-      │   └── 
+      │   └──
       │
-      ├── react (example.com)
-      │   ├── 
+      ├── react (http://localhost:3000/)
+      │   |
       │   ├── src
-      │   │   └── index.js
-      │   │
-      │   └── package.json
-      │
+      │   │   |── index.js
+      │   │   ├── App.js
+      │   │   ├── Header.js
+      │   │   ├── SearchOrLocate.js
+      │   │   ├── Forecast.js
+      |   |
+      |   ├── .eslintrc.json
+      |   ├── .gitignore
+      │   ├── package.json
+      |   └── README.md
+      |
       ├── .gitignore
+      ├── package.json
       └── README.md
-
-
