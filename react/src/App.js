@@ -5,45 +5,56 @@ import Forecast from "./Forecast";
 import "./App.css";
 
 function App() {
-  const [loading, setLoading] = useState(false);
   const [allForecasts, setAllForecasts] = useState([]);
 
+  function updateForecasts(newEntry) {
+    setAllForecasts([...allForecasts, newEntry]);
+  }
+
+  function deleteForecast(id) {
+    const tempList = allForecasts.filter((forecast) => forecast.id !== id);
+    setAllForecasts(tempList);
+
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const requestOptions = {
+      method: "DELETE",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(
+      `http://localhost:8000/api/forecasts/${id}/`,
+      requestOptions
+    ).catch((err) => console.log(`Error deleting forecast: ${err}`));
+  }
+
   useEffect(() => {
-    if (loading) {
-      // call api in backend and set our new data
-      // reset loading
-      setLoading(false);
-
-      fetch("http://localhost:8000/api/forecasts/")
-        .then((res) => res.json())
-        .then((data) => console.log(data))
-        .catch((err) => console.log(err));
-
-      // call api in backend and use list of forecast
-      // set to local state
-      setAllForecasts([
-        ...allForecasts,
-        {
-          name: "Ridgemark",
-          country: "US",
-          weather: "Clear",
-          temp: 77,
-        },
-      ]);
-      console.log("loading...");
+    async function getAll() {
+      try {
+        const response = await fetch("http://localhost:8000/api/forecasts/");
+        const data = await response.json();
+        setAllForecasts(data);
+      } catch (err) {
+        console.log(err);
+      }
     }
-  }, [loading]);
+    getAll();
+  }, []);
 
   return (
     <React.Fragment>
       <Header />
-      <SearchOrLocate setLoading={setLoading} />
+      <SearchOrLocate updateList={updateForecasts} />
       <div className="forecasts-container">
-        {allForecasts.map((weather, idx) => {
+        {allForecasts.map((weather) => {
           return (
             <Forecast
-              key={idx}
-              city={weather.name}
+              updateList={deleteForecast}
+              key={weather.id}
+              id={weather.id}
+              city={weather.city}
               country={weather.country}
               forecast={weather.weather}
               temp={weather.temp}

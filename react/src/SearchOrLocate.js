@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./SearchOrLocate.css";
 // import axios from "axios";
 
-function addCityToDB(forecast) {
+function addCityToDB(forecast, update) {
   const data = JSON.stringify(forecast);
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
@@ -17,23 +17,18 @@ function addCityToDB(forecast) {
 
   fetch("http://localhost:8000/api/forecasts/", requestOptions)
     .then((response) => response.json())
-    .then((data) => console.log(data))
+    .then((data) => update(data))
     .catch((err) => console.log(`Error inserting data to DB: ${err}`));
 }
 
-function SearchOrLocate({ setLoading }) {
+function SearchOrLocate({ updateList }) {
   const [city, setCity] = useState("");
-
-  useEffect(() => {
-    // happening after load
-  }, []);
 
   function updateState(e) {
     setCity(e.target.value);
   }
 
   async function createNewForecast(position) {
-    setLoading(true);
     try {
       if (position.coords) {
         const response = await fetch(
@@ -46,7 +41,7 @@ function SearchOrLocate({ setLoading }) {
           weather: data.weather[0].main,
           temp: Math.round(data.main.temp),
         };
-        addCityToDB(newForecast);
+        addCityToDB(newForecast, updateList);
       } else {
         const response = await fetch(
           `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=cc4153e2e5a1f18446b28046a92a1f7b&units=imperial`
@@ -58,7 +53,7 @@ function SearchOrLocate({ setLoading }) {
           weather: data.weather[0].main,
           temp: Math.round(data.main.temp),
         };
-        addCityToDB(newForecast);
+        addCityToDB(newForecast, updateList);
       }
     } catch (err) {
       console.log(err);
@@ -101,7 +96,7 @@ function SearchOrLocate({ setLoading }) {
 }
 
 SearchOrLocate.propTypes = {
-  setLoading: PropTypes.func,
+  updateList: PropTypes.func,
 };
 
 export default SearchOrLocate;
