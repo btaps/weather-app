@@ -1,0 +1,57 @@
+.forecast {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 40px 10%;
+  border-radius: 20px;
+  background: #fff;
+  color: #000;
+  min-width: 15rem;
+}
+
+.forecast::after {
+  content: "";
+  width: 90%;
+  height: 50px;
+  position: absolute;
+  bottom: -12px;
+  left: 5%;
+  z-index: -1;
+  opacity: 0.3;
+  border-radius: 20px;
+  background: #fff;
+}
+
+.forecast__city {
+  color: #696969;
+  font-size: 1.7rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.forecast__country {
+  padding: 0.2em 0.6em;
+  border-radius: 30px;
+  color: #fff;
+  background: orange;
+  font-size: 0.7rem;
+  vertical-align: text-top;
+}
+
+.forecast__temp {
+  display: flex;
+  font-weight: 800;
+  font-size: 2.5rem;
+}
+
+.forecast__temp span {
+  font-size: 2rem;
+  padding-left: 0.7rem;
+}
+
+.forecast__weather {
+  letter-spacing: 0.2rem;
+  font-weight: 300;
+  font-size: 1.2rem;
+  padding-top: 2rem;
+}
