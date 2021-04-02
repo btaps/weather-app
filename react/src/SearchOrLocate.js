@@ -1,6 +1,25 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "./SearchOrLocate.css";
+// import axios from "axios";
+
+function addCityToDB(forecast) {
+  const data = JSON.stringify(forecast);
+  const headers = new Headers();
+  headers.append("Content-Type", "application/json");
+
+  const requestOptions = {
+    method: "POST",
+    headers: headers,
+    body: data,
+    redirect: "follow",
+  };
+
+  fetch("http://localhost:8000/api/forecasts/", requestOptions)
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((err) => console.log(`Error inserting data to DB: ${err}`));
+}
 
 function SearchOrLocate({ setLoading }) {
   const [city, setCity] = useState("");
@@ -13,16 +32,36 @@ function SearchOrLocate({ setLoading }) {
     setCity(e.target.value);
   }
 
-  function createNewForecast(position) {
+  async function createNewForecast(position) {
     setLoading(true);
-    if (position.coords) {
-      // use coordinates
-      console.log(
-        `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`
-      );
-    } else {
-      //use city name
-      console.log(city);
+    try {
+      if (position.coords) {
+        const response = await fetch(
+          `http://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=cc4153e2e5a1f18446b28046a92a1f7b&units=imperial`
+        );
+        const data = await response.json();
+        const newForecast = {
+          city: data.name,
+          country: data.sys.country,
+          weather: data.weather[0].main,
+          temp: Math.round(data.main.temp),
+        };
+        addCityToDB(newForecast);
+      } else {
+        const response = await fetch(
+          `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=cc4153e2e5a1f18446b28046a92a1f7b&units=imperial`
+        );
+        const data = await response.json();
+        const newForecast = {
+          city: data.name,
+          country: data.sys.country,
+          weather: data.weather[0].main,
+          temp: Math.round(data.main.temp),
+        };
+        addCityToDB(newForecast);
+      }
+    } catch (err) {
+      console.log(err);
     }
   }
 

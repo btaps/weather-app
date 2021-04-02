@@ -14,6 +14,11 @@ function App() {
       // reset loading
       setLoading(false);
 
+      fetch("http://localhost:8000/api/forecasts/")
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err));
+
       // call api in backend and use list of forecast
       // set to local state
       setAllForecasts([
