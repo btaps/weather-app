@@ -9,12 +9,24 @@
 
     root
       │
-      ├── django (api.example.com)
-      │   ├──
-      │   ├──
-      │   │   ├──
-      │   │
-      │   └──
+      ├── django (http://localhost:8000/)
+      │   ├── server
+      |   |   ├── forecasts
+      |   |   |   ├── serializers.py
+      |   |   |   ├── api.py
+      |   |   |   ├── urls.py
+      |   |   |   ├── views.py
+      |   |   |   ├── models.py
+      |   |   |   └── tests.py
+      |   |   |
+      |   |   ├── server
+      |   |   |   ├── settings.py
+      |   |   |   └── urls.py
+      |   |   |
+      |   |   └── manage.py
+      |   |
+      │   ├── Pipfile
+      │   └── Pipfile.lock
       │
       ├── react (http://localhost:3000/)
       │   |
