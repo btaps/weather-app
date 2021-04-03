@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Header from "./Header";
-import SearchOrLocate from "./SearchOrLocate";
-import Forecast from "./Forecast";
+import Header from "./components/Header";
+import SearchOrLocate from "./components/SearchOrLocate";
+import Forecast from "./components/Forecast";
 import "./App.css";
 
 function App() {

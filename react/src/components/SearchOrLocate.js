@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./SearchOrLocate.css";
-// import axios from "axios";
 
 function addCityToDB(forecast, update) {
   const data = JSON.stringify(forecast);
@@ -87,7 +86,12 @@ function SearchOrLocate({ updateList }) {
         </button>
       </section>
       <section className="locate">
-        <button onClick={getLocation} className="locate__button">
+        <button
+          data-testid="search-button"
+          title="locate"
+          onClick={getLocation}
+          className="locate__button"
+        >
           LOCATE
         </button>
       </section>

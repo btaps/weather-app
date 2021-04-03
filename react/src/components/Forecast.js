@@ -4,7 +4,7 @@ import "./Forecast.css";
 
 function Forecast({ updateList, id, city, country, forecast, temp }) {
   return (
-    <div className="forecast">
+    <div title="forecast" className="forecast">
       <h3 className="forecast__city">
         {city} <span className="forecast__country">{country}</span>
       </h3>

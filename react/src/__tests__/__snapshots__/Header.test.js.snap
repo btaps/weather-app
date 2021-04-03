@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<header
+  className="header"
+>
+  <h1
+    className="header__title"
+  >
+    Weather App
+  </h1>
+  <p
+    className="header__info"
+  >
+    Search for a city or locate yourself!
+  </p>
+</header>
+`;
