@@ -21,12 +21,13 @@
 - cd django
 - run "pipenv shell" to launch a virtual enviornment
 - run "pip install -r requirements.txt" to install python packages used
+- cd into "server"
 - run "python manage.py migrate" to set up database migrations
 
 ## Start The App
 
 - In one terminal window cd into "react" and run "npm start"
-- In a separate terminal window, cd into "django" and run "python manage.py runserver"
+- In a separate terminal window, cd into "django", cd into "server", and run "python manage.py runserver"
 - You can now access the app's gui at http://localhost:3000/
 
 ## Run Tests (React)
