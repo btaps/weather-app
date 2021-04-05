@@ -38,6 +38,7 @@
 ## Run Tests (Django)
 
 - cd into "django"
+- if not in virtual enviornment, run "pipenv shell"
 - cd into "server"
 - run "python manage.py test"
 
