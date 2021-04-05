@@ -6,7 +6,7 @@
 - react hooks
 - django
 
-## Requirments:
+## Requirements:
 
 - npm
 - pip/pipenv
