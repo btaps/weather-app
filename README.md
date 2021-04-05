@@ -9,7 +9,7 @@
 ## Requirments:
 
 - npm
-- pip/pipnv
+- pip/pipenv
 
 ## Installation (React)
 
